@@ -18,7 +18,15 @@
       <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve disp" width="90" x="45" y="136">
         <parameter key="repository_entry" value="../data/disp"/>
       </operator>
-      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join" width="90" x="179" y="34">
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (2)" width="90" x="112" y="85">
+        <parameter key="attribute_name" value="account_id"/>
+        <parameter key="target_role" value="regular"/>
+        <list key="set_additional_roles">
+          <parameter key="client_id" value="regular"/>
+          <parameter key="disp_id" value="regular"/>
+        </list>
+      </operator>
+      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join" width="90" x="246" y="34">
         <parameter key="remove_double_attributes" value="true"/>
         <parameter key="join_type" value="inner"/>
         <parameter key="use_id_attribute_as_key" value="false"/>
@@ -39,7 +47,7 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="7.6.001" expanded="true" height="103" name="Filter Examples" width="90" x="246" y="85">
+      <operator activated="true" class="filter_examples" compatibility="7.6.001" expanded="true" height="103" name="Filter Examples" width="90" x="313" y="238">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -72,7 +80,8 @@
         <parameter key="repository_entry" value="../data/Clean data/client_accounts"/>
       </operator>
       <connect from_op="Retrieve client_clean" from_port="output" to_op="Join" to_port="left"/>
-      <connect from_op="Retrieve disp" from_port="output" to_op="Join" to_port="right"/>
+      <connect from_op="Retrieve disp" from_port="output" to_op="Set Role (2)" to_port="example set input"/>
+      <connect from_op="Set Role (2)" from_port="example set output" to_op="Join" to_port="right"/>
       <connect from_op="Join" from_port="join" to_op="Join (2)" to_port="left"/>
       <connect from_op="Retrieve account" from_port="output" to_op="Join (2)" to_port="right"/>
       <connect from_op="Join (2)" from_port="join" to_op="Filter Examples" to_port="example set input"/>

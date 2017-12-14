@@ -51,10 +51,14 @@
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
+      <operator activated="true" class="store" compatibility="7.6.001" expanded="true" height="68" name="Store" width="90" x="514" y="34">
+        <parameter key="repository_entry" value="../data/calc/max_min_balance"/>
+      </operator>
       <connect from_op="Retrieve account" from_port="output" to_op="Join" to_port="right"/>
       <connect from_op="Retrieve trans_train_clean" from_port="output" to_op="Join" to_port="left"/>
       <connect from_op="Join" from_port="join" to_op="Aggregate" to_port="example set input"/>
-      <connect from_op="Aggregate" from_port="example set output" to_port="result 1"/>
+      <connect from_op="Aggregate" from_port="example set output" to_op="Store" to_port="input"/>
+      <connect from_op="Store" from_port="through" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
