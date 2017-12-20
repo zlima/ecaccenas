@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="7.6.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="7.6.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve loan_train" width="90" x="45" y="85">
+        <parameter key="repository_entry" value="../data/loan_train"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (5)" width="90" x="112" y="85">
+        <parameter key="attribute_name" value="loan_id"/>
+        <parameter key="target_role" value="regular"/>
+        <list key="set_additional_roles"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve disp" width="90" x="45" y="187">
+        <parameter key="repository_entry" value="../data/disp"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role" width="90" x="179" y="187">
+        <parameter key="attribute_name" value="client_id"/>
+        <parameter key="target_role" value="regular"/>
+        <list key="set_additional_roles">
+          <parameter key="disp_id" value="regular"/>
+        </list>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve card_train" width="90" x="45" y="289">
+        <parameter key="repository_entry" value="../data/card_train"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (2)" width="90" x="179" y="289">
+        <parameter key="attribute_name" value="card_id"/>
+        <parameter key="target_role" value="regular"/>
+        <list key="set_additional_roles">
+          <parameter key="disp_id" value="regular"/>
+        </list>
+      </operator>
+      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join" width="90" x="380" y="289">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="disp_id" value="disp_id"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve client_accounts" width="90" x="45" y="391">
+        <parameter key="repository_entry" value="../data/Clean data/client_accounts"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (3)" width="90" x="179" y="391">
+        <parameter key="attribute_name" value="client_id"/>
+        <parameter key="target_role" value="regular"/>
+        <list key="set_additional_roles">
+          <parameter key="account_id" value="regular"/>
+        </list>
+      </operator>
+      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (2)" width="90" x="514" y="340">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="client_id" value="client_id"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (4)" width="90" x="380" y="238">
+        <parameter key="attribute_name" value="client_id"/>
+        <parameter key="target_role" value="id"/>
+        <list key="set_additional_roles">
+          <parameter key="account_id" value="regular"/>
+        </list>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve client_accounts (2)" width="90" x="112" y="34">
+        <parameter key="repository_entry" value="../data/Clean data/client_accounts"/>
+      </operator>
+      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (4)" width="90" x="246" y="34">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="account_id" value="account_id"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (3)" width="90" x="380" y="34">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="left"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="client_id" value="client_id"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="7.6.001" expanded="true" height="68" name="Store" width="90" x="514" y="34">
+        <parameter key="repository_entry" value="../data/calc/cardrelatedtoclient"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve disp (2)" width="90" x="45" y="697">
+        <parameter key="repository_entry" value="../data/disp"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (7)" width="90" x="179" y="697">
+        <parameter key="attribute_name" value="client_id"/>
+        <parameter key="target_role" value="regular"/>
+        <list key="set_additional_roles">
+          <parameter key="disp_id" value="regular"/>
+        </list>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve client_accounts (3)" width="90" x="45" y="901">
+        <parameter key="repository_entry" value="../data/Clean data/client_accounts"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (9)" width="90" x="179" y="901">
+        <parameter key="attribute_name" value="client_id"/>
+        <parameter key="target_role" value="regular"/>
+        <list key="set_additional_roles">
+          <parameter key="account_id" value="regular"/>
+        </list>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve client_accounts (4)" width="90" x="112" y="544">
+        <parameter key="repository_entry" value="../data/Clean data/client_accounts"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve loan_test" width="90" x="45" y="595">
+        <parameter key="repository_entry" value="../data/loan_test"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (6)" width="90" x="179" y="595">
+        <parameter key="attribute_name" value="loan_id"/>
+        <parameter key="target_role" value="regular"/>
+        <list key="set_additional_roles"/>
+      </operator>
+      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (7)" width="90" x="246" y="544">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="account_id" value="account_id"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve card_test" width="90" x="45" y="799">
+        <parameter key="repository_entry" value="../data/card_test"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (8)" width="90" x="179" y="799">
+        <parameter key="attribute_name" value="card_id"/>
+        <parameter key="target_role" value="regular"/>
+        <list key="set_additional_roles">
+          <parameter key="disp_id" value="regular"/>
+        </list>
+      </operator>
+      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (5)" width="90" x="380" y="799">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="disp_id" value="disp_id"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (6)" width="90" x="514" y="850">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="client_id" value="client_id"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (10)" width="90" x="380" y="748">
+        <parameter key="attribute_name" value="client_id"/>
+        <parameter key="target_role" value="id"/>
+        <list key="set_additional_roles">
+          <parameter key="account_id" value="regular"/>
+        </list>
+      </operator>
+      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (8)" width="90" x="380" y="544">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="left"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="client_id" value="client_id"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="7.6.001" expanded="true" height="68" name="Store (2)" width="90" x="514" y="544">
+        <parameter key="repository_entry" value="../data/calc/cardrelatedtoclient_test"/>
+      </operator>
+      <connect from_op="Retrieve loan_train" from_port="output" to_op="Set Role (5)" to_port="example set input"/>
+      <connect from_op="Set Role (5)" from_port="example set output" to_op="Join (4)" to_port="right"/>
+      <connect from_op="Retrieve disp" from_port="output" to_op="Set Role" to_port="example set input"/>
+      <connect from_op="Set Role" from_port="example set output" to_op="Join" to_port="left"/>
+      <connect from_op="Retrieve card_train" from_port="output" to_op="Set Role (2)" to_port="example set input"/>
+      <connect from_op="Set Role (2)" from_port="example set output" to_op="Join" to_port="right"/>
+      <connect from_op="Join" from_port="join" to_op="Join (2)" to_port="left"/>
+      <connect from_op="Retrieve client_accounts" from_port="output" to_op="Set Role (3)" to_port="example set input"/>
+      <connect from_op="Set Role (3)" from_port="example set output" to_op="Join (2)" to_port="right"/>
+      <connect from_op="Join (2)" from_port="join" to_op="Set Role (4)" to_port="example set input"/>
+      <connect from_op="Set Role (4)" from_port="example set output" to_op="Join (3)" to_port="right"/>
+      <connect from_op="Retrieve client_accounts (2)" from_port="output" to_op="Join (4)" to_port="left"/>
+      <connect from_op="Join (4)" from_port="join" to_op="Join (3)" to_port="left"/>
+      <connect from_op="Join (3)" from_port="join" to_op="Store" to_port="input"/>
+      <connect from_op="Store" from_port="through" to_port="result 1"/>
+      <connect from_op="Retrieve disp (2)" from_port="output" to_op="Set Role (7)" to_port="example set input"/>
+      <connect from_op="Set Role (7)" from_port="example set output" to_op="Join (5)" to_port="left"/>
+      <connect from_op="Retrieve client_accounts (3)" from_port="output" to_op="Set Role (9)" to_port="example set input"/>
+      <connect from_op="Set Role (9)" from_port="example set output" to_op="Join (6)" to_port="right"/>
+      <connect from_op="Retrieve client_accounts (4)" from_port="output" to_op="Join (7)" to_port="left"/>
+      <connect from_op="Retrieve loan_test" from_port="output" to_op="Set Role (6)" to_port="example set input"/>
+      <connect from_op="Set Role (6)" from_port="example set output" to_op="Join (7)" to_port="right"/>
+      <connect from_op="Join (7)" from_port="join" to_op="Join (8)" to_port="left"/>
+      <connect from_op="Retrieve card_test" from_port="output" to_op="Set Role (8)" to_port="example set input"/>
+      <connect from_op="Set Role (8)" from_port="example set output" to_op="Join (5)" to_port="right"/>
+      <connect from_op="Join (5)" from_port="join" to_op="Join (6)" to_port="left"/>
+      <connect from_op="Join (6)" from_port="join" to_op="Set Role (10)" to_port="example set input"/>
+      <connect from_op="Set Role (10)" from_port="example set output" to_op="Join (8)" to_port="right"/>
+      <connect from_op="Join (8)" from_port="join" to_op="Store (2)" to_port="input"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

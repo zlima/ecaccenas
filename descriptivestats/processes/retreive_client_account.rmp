@@ -18,7 +18,7 @@
       <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve disp" width="90" x="45" y="136">
         <parameter key="repository_entry" value="../data/disp"/>
       </operator>
-      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (2)" width="90" x="112" y="85">
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (2)" width="90" x="179" y="85">
         <parameter key="attribute_name" value="account_id"/>
         <parameter key="target_role" value="regular"/>
         <list key="set_additional_roles">
