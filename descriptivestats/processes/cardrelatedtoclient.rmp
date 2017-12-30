@@ -12,28 +12,28 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve loan_train" width="90" x="45" y="85">
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve loan_train" width="90" x="45" y="136">
         <parameter key="repository_entry" value="../data/loan_train"/>
       </operator>
-      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (5)" width="90" x="112" y="85">
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (5)" width="90" x="179" y="136">
         <parameter key="attribute_name" value="loan_id"/>
         <parameter key="target_role" value="regular"/>
         <list key="set_additional_roles"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve disp" width="90" x="45" y="187">
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve disp" width="90" x="45" y="238">
         <parameter key="repository_entry" value="../data/disp"/>
       </operator>
-      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role" width="90" x="179" y="187">
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role" width="90" x="179" y="238">
         <parameter key="attribute_name" value="client_id"/>
         <parameter key="target_role" value="regular"/>
         <list key="set_additional_roles">
           <parameter key="disp_id" value="regular"/>
         </list>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve card_train" width="90" x="45" y="289">
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve card_train" width="90" x="45" y="340">
         <parameter key="repository_entry" value="../data/card_train"/>
       </operator>
-      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (2)" width="90" x="179" y="289">
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (2)" width="90" x="179" y="340">
         <parameter key="attribute_name" value="card_id"/>
         <parameter key="target_role" value="regular"/>
         <list key="set_additional_roles">
@@ -49,10 +49,10 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve client_accounts" width="90" x="45" y="391">
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve client_accounts" width="90" x="45" y="442">
         <parameter key="repository_entry" value="../data/Clean data/client_accounts"/>
       </operator>
-      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (3)" width="90" x="179" y="391">
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (3)" width="90" x="179" y="442">
         <parameter key="attribute_name" value="client_id"/>
         <parameter key="target_role" value="regular"/>
         <list key="set_additional_roles">
@@ -68,14 +68,14 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (4)" width="90" x="380" y="238">
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (4)" width="90" x="380" y="136">
         <parameter key="attribute_name" value="client_id"/>
         <parameter key="target_role" value="id"/>
         <list key="set_additional_roles">
           <parameter key="account_id" value="regular"/>
         </list>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve client_accounts (2)" width="90" x="112" y="34">
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve client_accounts (2)" width="90" x="45" y="34">
         <parameter key="repository_entry" value="../data/Clean data/client_accounts"/>
       </operator>
       <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (4)" width="90" x="246" y="34">
@@ -119,7 +119,7 @@
           <parameter key="account_id" value="regular"/>
         </list>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve client_accounts (4)" width="90" x="112" y="544">
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve client_accounts (4)" width="90" x="45" y="544">
         <parameter key="repository_entry" value="../data/Clean data/client_accounts"/>
       </operator>
       <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve loan_test" width="90" x="45" y="595">
@@ -167,7 +167,7 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (10)" width="90" x="380" y="748">
+      <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role (10)" width="90" x="380" y="697">
         <parameter key="attribute_name" value="client_id"/>
         <parameter key="target_role" value="id"/>
         <list key="set_additional_roles">

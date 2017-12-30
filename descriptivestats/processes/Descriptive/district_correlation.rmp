@@ -12,8 +12,14 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve district" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="../../data/district"/>
+      <operator activated="false" class="remove_useless_attributes" compatibility="7.6.001" expanded="true" height="82" name="Remove Useless Attributes" width="90" x="112" y="289">
+        <parameter key="numerical_min_deviation" value="0.0"/>
+        <parameter key="nominal_useless_above" value="1.0"/>
+        <parameter key="nominal_remove_id_like" value="false"/>
+        <parameter key="nominal_useless_below" value="0.0"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve distric_clean" width="90" x="45" y="85">
+        <parameter key="repository_entry" value="../../data/Clean data/distric_clean"/>
       </operator>
       <operator activated="true" class="set_role" compatibility="7.6.001" expanded="true" height="82" name="Set Role" width="90" x="179" y="85">
         <parameter key="attribute_name" value="code "/>
@@ -59,13 +65,7 @@
         <parameter key="normalize_weights" value="true"/>
         <parameter key="squared_correlation" value="false"/>
       </operator>
-      <operator activated="false" class="remove_useless_attributes" compatibility="7.6.001" expanded="true" height="82" name="Remove Useless Attributes" width="90" x="112" y="289">
-        <parameter key="numerical_min_deviation" value="0.0"/>
-        <parameter key="nominal_useless_above" value="1.0"/>
-        <parameter key="nominal_remove_id_like" value="false"/>
-        <parameter key="nominal_useless_below" value="0.0"/>
-      </operator>
-      <connect from_op="Retrieve district" from_port="output" to_op="Set Role" to_port="example set input"/>
+      <connect from_op="Retrieve distric_clean" from_port="output" to_op="Set Role" to_port="example set input"/>
       <connect from_op="Set Role" from_port="example set output" to_op="Select Attributes" to_port="example set input"/>
       <connect from_op="Select Attributes" from_port="example set output" to_op="Normalize" to_port="example set input"/>
       <connect from_op="Normalize" from_port="example set output" to_op="Correlation Matrix" to_port="example set"/>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="7.6.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="7.6.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve jointables" width="90" x="45" y="34">
+        <parameter key="repository_entry" value="../data/calc/jointables"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve jointables_test2" width="90" x="45" y="391">
+        <parameter key="repository_entry" value="../data/calc/jointables_test2"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve client_clean" width="90" x="45" y="136">
+        <parameter key="repository_entry" value="../data/Clean data/client_clean"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="7.6.001" expanded="true" height="103" name="Multiply" width="90" x="45" y="238"/>
+      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join" width="90" x="246" y="34">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="client_id" value="client_id"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (3)" width="90" x="246" y="340">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="client_id" value="client_id"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve distric_clean" width="90" x="246" y="442">
+        <parameter key="repository_entry" value="../data/Clean data/distric_clean"/>
+      </operator>
+      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (4)" width="90" x="380" y="340">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="district_id" value="code "/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="7.6.001" expanded="true" height="68" name="Store (2)" width="90" x="514" y="340">
+        <parameter key="repository_entry" value="../data/calc/jointables_test2"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve distric_clean (2)" width="90" x="246" y="136">
+        <parameter key="repository_entry" value="../data/Clean data/distric_clean"/>
+      </operator>
+      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (2)" width="90" x="380" y="34">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="district_id" value="code "/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="7.6.001" expanded="true" height="68" name="Store" width="90" x="514" y="34">
+        <parameter key="repository_entry" value="../data/calc/jointables"/>
+      </operator>
+      <connect from_op="Retrieve jointables" from_port="output" to_op="Join" to_port="left"/>
+      <connect from_op="Retrieve jointables_test2" from_port="output" to_op="Join (3)" to_port="right"/>
+      <connect from_op="Retrieve client_clean" from_port="output" to_op="Multiply" to_port="input"/>
+      <connect from_op="Multiply" from_port="output 1" to_op="Join" to_port="right"/>
+      <connect from_op="Multiply" from_port="output 2" to_op="Join (3)" to_port="left"/>
+      <connect from_op="Join" from_port="join" to_op="Join (2)" to_port="left"/>
+      <connect from_op="Join (3)" from_port="join" to_op="Join (4)" to_port="left"/>
+      <connect from_op="Retrieve distric_clean" from_port="output" to_op="Join (4)" to_port="right"/>
+      <connect from_op="Join (4)" from_port="join" to_op="Store (2)" to_port="input"/>
+      <connect from_op="Retrieve distric_clean (2)" from_port="output" to_op="Join (2)" to_port="right"/>
+      <connect from_op="Join (2)" from_port="join" to_op="Store" to_port="input"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+    </process>
+  </operator>
+</process>

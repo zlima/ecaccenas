@@ -21,15 +21,15 @@
       <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve AccountWithOwnerAge" width="90" x="45" y="480">
         <parameter key="repository_entry" value="../../Data/Modified/AccountWithOwnerAge"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve Districts" width="90" x="179" y="570">
-        <parameter key="repository_entry" value="../../Data/Districts"/>
-      </operator>
       <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (2)" width="90" x="246" y="390">
         <parameter key="remove_double_attributes" value="true"/>
         <parameter key="join_type" value="inner"/>
         <parameter key="use_id_attribute_as_key" value="true"/>
         <list key="key_attributes"/>
         <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve distric_clean" width="90" x="179" y="544">
+        <parameter key="repository_entry" value="../data/Clean data/distric_clean"/>
       </operator>
       <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (3)" width="90" x="380" y="435">
         <parameter key="remove_double_attributes" value="true"/>
@@ -260,8 +260,8 @@
       <connect from_op="Retrieve Loans" from_port="output" to_op="Join" to_port="left"/>
       <connect from_op="Retrieve AccountWithMensalIncomeExpenseMetadata" from_port="output" to_op="Join (2)" to_port="left"/>
       <connect from_op="Retrieve AccountWithOwnerAge" from_port="output" to_op="Join (2)" to_port="right"/>
-      <connect from_op="Retrieve Districts" from_port="output" to_op="Join (3)" to_port="right"/>
       <connect from_op="Join (2)" from_port="join" to_op="Join (3)" to_port="left"/>
+      <connect from_op="Retrieve distric_clean" from_port="output" to_op="Join (3)" to_port="right"/>
       <connect from_op="Join (3)" from_port="join" to_op="Join" to_port="right"/>
       <connect from_op="Join" from_port="join" to_op="Select Attributes" to_port="example set input"/>
       <connect from_op="Select Attributes" from_port="example set output" to_op="Replace" to_port="example set input"/>
