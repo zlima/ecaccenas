@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><process version="7.6.001">
+<?xml version="1.0" encoding="UTF-8"?><process version="8.0.001">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="7.6.001" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="8.0.001" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
@@ -12,14 +12,14 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve account" width="90" x="45" y="136">
+      <operator activated="true" class="retrieve" compatibility="8.0.001" expanded="true" height="68" name="Retrieve account" width="90" x="45" y="136">
         <parameter key="repository_entry" value="../data/account"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve trans_train_clean" width="90" x="45" y="34">
+      <operator activated="true" class="retrieve" compatibility="8.0.001" expanded="true" height="68" name="Retrieve trans_train_clean" width="90" x="45" y="34">
         <parameter key="repository_entry" value="../data/Clean data/trans_train_clean"/>
       </operator>
-      <operator activated="true" class="multiply" compatibility="7.6.001" expanded="true" height="103" name="Multiply" width="90" x="45" y="238"/>
-      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join" width="90" x="179" y="34">
+      <operator activated="true" class="multiply" compatibility="8.0.001" expanded="true" height="103" name="Multiply" width="90" x="45" y="238"/>
+      <operator activated="true" class="join" compatibility="8.0.001" expanded="true" height="82" name="Join" width="90" x="179" y="34">
         <parameter key="remove_double_attributes" value="true"/>
         <parameter key="join_type" value="inner"/>
         <parameter key="use_id_attribute_as_key" value="false"/>
@@ -28,7 +28,7 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="7.6.001" expanded="true" height="82" name="Aggregate" width="90" x="313" y="34">
+      <operator activated="true" class="aggregate" compatibility="8.0.001" expanded="true" height="82" name="Aggregate" width="90" x="313" y="34">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -46,19 +46,20 @@
         <list key="aggregation_attributes">
           <parameter key="balance" value="maximum"/>
           <parameter key="balance" value="minimum"/>
+          <parameter key="balance" value="average"/>
         </list>
         <parameter key="group_by_attributes" value="account_id"/>
         <parameter key="count_all_combinations" value="false"/>
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
-      <operator activated="true" class="store" compatibility="7.6.001" expanded="true" height="68" name="Store" width="90" x="514" y="34">
+      <operator activated="true" class="store" compatibility="8.0.001" expanded="true" height="68" name="Store" width="90" x="514" y="34">
         <parameter key="repository_entry" value="../data/calc/max_min_balance"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve trans_test" width="90" x="179" y="187">
+      <operator activated="true" class="retrieve" compatibility="8.0.001" expanded="true" height="68" name="Retrieve trans_test" width="90" x="179" y="187">
         <parameter key="repository_entry" value="../data/trans_test"/>
       </operator>
-      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join (2)" width="90" x="179" y="289">
+      <operator activated="true" class="join" compatibility="8.0.001" expanded="true" height="82" name="Join (2)" width="90" x="179" y="289">
         <parameter key="remove_double_attributes" value="true"/>
         <parameter key="join_type" value="inner"/>
         <parameter key="use_id_attribute_as_key" value="false"/>
@@ -67,7 +68,7 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="7.6.001" expanded="true" height="82" name="Aggregate (2)" width="90" x="313" y="289">
+      <operator activated="true" class="aggregate" compatibility="8.0.001" expanded="true" height="82" name="Aggregate (2)" width="90" x="313" y="289">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -85,13 +86,14 @@
         <list key="aggregation_attributes">
           <parameter key="balance" value="maximum"/>
           <parameter key="balance" value="minimum"/>
+          <parameter key="balance" value="average"/>
         </list>
         <parameter key="group_by_attributes" value="account_id"/>
         <parameter key="count_all_combinations" value="false"/>
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
-      <operator activated="true" class="store" compatibility="7.6.001" expanded="true" height="68" name="Store (2)" width="90" x="514" y="289">
+      <operator activated="true" class="store" compatibility="8.0.001" expanded="true" height="68" name="Store (2)" width="90" x="514" y="289">
         <parameter key="repository_entry" value="../data/calc/max_min_balance_test"/>
       </operator>
       <connect from_op="Retrieve account" from_port="output" to_op="Multiply" to_port="input"/>

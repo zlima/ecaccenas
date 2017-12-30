@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><process version="7.6.001">
+<?xml version="1.0" encoding="UTF-8"?><process version="8.0.001">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="7.6.001" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="8.0.001" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
@@ -12,13 +12,13 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve jointables_test" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="../../data/calc/jointables_test"/>
+      <operator activated="true" class="retrieve" compatibility="8.0.001" expanded="true" height="68" name="Retrieve jointables_test" width="90" x="45" y="34">
+        <parameter key="repository_entry" value="../../data/calc/jointables_test2"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="7.6.001" expanded="true" height="68" name="Retrieve loan_test" width="90" x="45" y="136">
+      <operator activated="true" class="retrieve" compatibility="8.0.001" expanded="true" height="68" name="Retrieve loan_test" width="90" x="45" y="136">
         <parameter key="repository_entry" value="../../data/loan_test"/>
       </operator>
-      <operator activated="true" class="join" compatibility="7.6.001" expanded="true" height="82" name="Join" width="90" x="246" y="34">
+      <operator activated="true" class="join" compatibility="8.0.001" expanded="true" height="82" name="Join" width="90" x="246" y="34">
         <parameter key="remove_double_attributes" value="true"/>
         <parameter key="join_type" value="inner"/>
         <parameter key="use_id_attribute_as_key" value="false"/>
@@ -27,10 +27,10 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="select_attributes" compatibility="7.6.001" expanded="true" height="82" name="Select Attributes (2)" width="90" x="380" y="136">
+      <operator activated="true" class="select_attributes" compatibility="8.0.001" expanded="true" height="82" name="Select Attributes (2)" width="90" x="380" y="136">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
-        <parameter key="attributes" value="status|amount|duration|issued|maximum(balance)|minimum(balance)|num_credittrans_mensal_avg|num_withtrans_mensal_avg|payments|total_mensal_numtrans_avg|transactions_ammount_avg|mensal_expenses_avg|mensal_income_avg|mensal_income_transactions_avg|loan_id"/>
+        <parameter key="attributes" value="status|amount|duration|issued|loan_id|maximum(balance)|mensal_expenses_avg|mensal_income_avg|mensal_income_transactions_avg|minimum(balance)|num_credittrans_mensal_avg|num_withtrans_mensal_avg|payments|total_mensal_numtrans_avg|transactions_ammount_avg|average(balance)"/>
         <parameter key="use_except_expression" value="false"/>
         <parameter key="value_type" value="attribute_value"/>
         <parameter key="use_value_type_exception" value="false"/>
@@ -41,21 +41,21 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="store" compatibility="7.6.001" expanded="true" height="68" name="Store (2)" width="90" x="514" y="85">
+      <operator activated="true" class="store" compatibility="8.0.001" expanded="true" height="68" name="Store (2)" width="90" x="514" y="85">
         <parameter key="repository_entry" value="../../data/kaggle/kaggle2"/>
       </operator>
-      <operator activated="false" class="detect_outlier_distances" compatibility="7.6.001" expanded="true" height="82" name="Detect Outlier (Distances)" width="90" x="45" y="442">
+      <operator activated="false" class="detect_outlier_distances" compatibility="8.0.001" expanded="true" height="82" name="Detect Outlier (Distances)" width="90" x="45" y="442">
         <parameter key="number_of_neighbors" value="10"/>
         <parameter key="number_of_outliers" value="10"/>
         <parameter key="distance_function" value="euclidian distance"/>
       </operator>
-      <operator activated="false" class="remove_useless_attributes" compatibility="7.6.001" expanded="true" height="82" name="Remove Useless Attributes" width="90" x="45" y="544">
+      <operator activated="false" class="remove_useless_attributes" compatibility="8.0.001" expanded="true" height="82" name="Remove Useless Attributes" width="90" x="45" y="544">
         <parameter key="numerical_min_deviation" value="0.0"/>
         <parameter key="nominal_useless_above" value="1.0"/>
         <parameter key="nominal_remove_id_like" value="false"/>
         <parameter key="nominal_useless_below" value="0.0"/>
       </operator>
-      <operator activated="false" class="remove_correlated_attributes" compatibility="7.6.001" expanded="true" height="82" name="Remove Correlated Attributes" width="90" x="246" y="544">
+      <operator activated="false" class="remove_correlated_attributes" compatibility="8.0.001" expanded="true" height="82" name="Remove Correlated Attributes" width="90" x="246" y="544">
         <parameter key="correlation" value="0.65"/>
         <parameter key="filter_relation" value="greater equals"/>
         <parameter key="attribute_order" value="original"/>
@@ -63,7 +63,7 @@
         <parameter key="use_local_random_seed" value="false"/>
         <parameter key="local_random_seed" value="1992"/>
       </operator>
-      <operator activated="false" class="store" compatibility="7.6.001" expanded="true" height="68" name="Store" width="90" x="380" y="442"/>
+      <operator activated="false" class="store" compatibility="8.0.001" expanded="true" height="68" name="Store" width="90" x="380" y="442"/>
       <connect from_op="Retrieve jointables_test" from_port="output" to_op="Join" to_port="left"/>
       <connect from_op="Retrieve loan_test" from_port="output" to_op="Join" to_port="right"/>
       <connect from_op="Join" from_port="join" to_op="Select Attributes (2)" to_port="example set input"/>
