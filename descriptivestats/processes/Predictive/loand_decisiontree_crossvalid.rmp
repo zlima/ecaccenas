@@ -98,7 +98,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="false" class="operator_toolbox:smote" compatibility="0.7.000" expanded="true" height="82" name="Smote Upsampling" width="90" x="380" y="136">
+      <operator activated="false" class="operator_toolbox:smote" compatibility="0.7.000" expanded="true" height="82" name="Smote Upsampling" width="90" x="514" y="238">
         <parameter key="Number of Neighbours" value="5"/>
         <parameter key="Normalize" value="true"/>
         <parameter key="Equalize Classes" value="true"/>
@@ -127,7 +127,7 @@
         <parameter key="use_local_random_seed" value="false"/>
         <parameter key="local_random_seed" value="1992"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="7.6.001" expanded="true" height="103" name="Filter Examples" width="90" x="313" y="391">
+      <operator activated="false" class="filter_examples" compatibility="7.6.001" expanded="true" height="103" name="Filter Examples" width="90" x="313" y="391">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -151,8 +151,8 @@
           <operator activated="true" class="neural_net" compatibility="7.6.001" expanded="true" height="82" name="Neural Net" width="90" x="179" y="697">
             <list key="hidden_layers"/>
             <parameter key="training_cycles" value="500"/>
-            <parameter key="learning_rate" value="0.3"/>
-            <parameter key="momentum" value="0.3"/>
+            <parameter key="learning_rate" value="0.1"/>
+            <parameter key="momentum" value="0.2"/>
             <parameter key="decay" value="false"/>
             <parameter key="shuffle" value="true"/>
             <parameter key="normalize" value="true"/>
@@ -249,7 +249,7 @@
             <parameter key="ridge" value="150.0"/>
           </operator>
           <operator activated="true" class="k_nn" compatibility="7.6.001" expanded="true" height="82" name="k-NN" width="90" x="179" y="238">
-            <parameter key="k" value="2"/>
+            <parameter key="k" value="1"/>
             <parameter key="weighted_vote" value="true"/>
             <parameter key="measure_types" value="MixedMeasures"/>
             <parameter key="mixed_measure" value="MixedEuclideanDistance"/>
@@ -268,14 +268,14 @@
           </operator>
           <operator activated="true" class="concurrency:parallel_decision_tree" compatibility="7.6.001" expanded="true" height="82" name="Decision Tree" width="90" x="179" y="34">
             <parameter key="criterion" value="information_gain"/>
-            <parameter key="maximal_depth" value="110"/>
+            <parameter key="maximal_depth" value="10"/>
             <parameter key="apply_pruning" value="true"/>
-            <parameter key="confidence" value="0.5"/>
+            <parameter key="confidence" value="0.25"/>
             <parameter key="apply_prepruning" value="true"/>
             <parameter key="minimal_gain" value="0.04"/>
             <parameter key="minimal_leaf_size" value="2"/>
             <parameter key="minimal_size_for_split" value="4"/>
-            <parameter key="number_of_prepruning_alternatives" value="1"/>
+            <parameter key="number_of_prepruning_alternatives" value="3"/>
           </operator>
           <operator activated="true" class="naive_bayes" compatibility="7.6.001" expanded="true" height="82" name="Naive Bayes" width="90" x="179" y="136">
             <parameter key="laplace_correction" value="true"/>
@@ -288,8 +288,8 @@
           <connect from_op="Multiply" from_port="output 5" to_op="Gradient Boosted Trees" to_port="training set"/>
           <connect from_op="Multiply" from_port="output 6" to_op="Replace Missing Values" to_port="example set input"/>
           <connect from_op="Multiply" from_port="output 7" to_op="Neural Net" to_port="training set"/>
-          <connect from_op="Neural Net" from_port="model" to_port="model"/>
           <connect from_op="Replace Missing Values" from_port="example set output" to_op="Random Forest" to_port="training set"/>
+          <connect from_op="Naive Bayes" from_port="model" to_port="model"/>
           <portSpacing port="source_training set" spacing="0"/>
           <portSpacing port="sink_model" spacing="0"/>
           <portSpacing port="sink_through 1" spacing="0"/>
@@ -440,6 +440,7 @@
           <connect from_op="Multiply (3)" from_port="output 2" to_op="Apply Model (2)" to_port="model"/>
           <connect from_op="Apply Model" from_port="labelled data" to_op="Performance (2)" to_port="labelled data"/>
           <connect from_op="Performance (2)" from_port="performance" to_port="performance 1"/>
+          <connect from_op="Performance (2)" from_port="example set" to_port="test set results"/>
           <connect from_op="Retrieve jointables_test2" from_port="output" to_op="Set Role (3)" to_port="example set input"/>
           <connect from_op="Set Role (3)" from_port="example set output" to_op="Select Attributes (4)" to_port="example set input"/>
           <connect from_op="Select Attributes (4)" from_port="example set output" to_op="Apply Model (2)" to_port="unlabelled data"/>
@@ -471,8 +472,7 @@
       <connect from_op="Select Attributes" from_port="example set output" to_op="Detect Outlier (Distances)" to_port="example set input"/>
       <connect from_op="Detect Outlier (Distances)" from_port="example set output" to_op="Remove Useless Attributes" to_port="example set input"/>
       <connect from_op="Remove Useless Attributes" from_port="example set output" to_op="Remove Correlated Attributes" to_port="example set input"/>
-      <connect from_op="Remove Correlated Attributes" from_port="example set output" to_op="Filter Examples" to_port="example set input"/>
-      <connect from_op="Filter Examples" from_port="example set output" to_op="Multiply (2)" to_port="input"/>
+      <connect from_op="Remove Correlated Attributes" from_port="example set output" to_op="Multiply (2)" to_port="input"/>
       <connect from_op="Multiply (2)" from_port="output 1" to_op="Cross Validation" to_port="example set"/>
       <connect from_op="Cross Validation" from_port="model" to_port="result 1"/>
       <connect from_op="Cross Validation" from_port="example set" to_port="result 2"/>
